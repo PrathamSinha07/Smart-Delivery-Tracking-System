@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Delivery Tracking</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0;
+            padding: 30px;
+            color: #333;
+        }
+
+        h2, h3 {
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        .center {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .low { color: green; }
+        .medium { color: orange; }
+        .high { color: red; }
+
+        .grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .grid .card {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>📦 Smart Delivery Tracker</h2>
+
+    <!-- 🔍 TRACK ORDER -->
+    <div class="card center">
+        <input type="text" id="orderId" placeholder="Enter Order ID (ORD101)">
+        <button onclick="track()">Track</button>
+
+        <div id="result"></div>
+    </div>
+
+    <!-- 📊 DASHBOARD -->
+    <h3>📊 Dashboard</h3>
+    <div id="dashboard" class="grid"></div>
+
+    <!-- 📦 ALL SHIPMENTS -->
+    <h3>📦 All Shipments</h3>
+    <div id="list"></div>
+
+</div>
+
+<script>
+function track() {
+
+    let orderId = document.getElementById("orderId").value;
+
+    fetch("http://127.0.0.1:8081/api/track/" + orderId)
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("Order not found");
+        }
+        return res.json();
+    })
+    .then(data => {
+
+        let categoryClass = data.delayCategory.toLowerCase();
+
+        document.getElementById("result").innerHTML = `
+            <div class="card">
+                <p><b>Order ID:</b> ${data.orderId}</p>
+                <p><b>Status:</b> ${data.status}</p>
+                <p><b>Location:</b> ${data.currentLocation}</p>
+                <p><b>Delay Probability:</b> ${data.delayProbability}</p>
+                <p><b>Category:</b> <span class="${categoryClass}">${data.delayCategory}</span></p>
+                <p><b>Reason:</b> ${data.reason}</p>
+            </div>
+        `;
+    })
+    .catch(err => {
+        document.getElementById("result").innerHTML = `
+            <div class="card" style="color:red;">
+                ❌ Order not found. Please enter a valid Order ID.
+            </div>
+        `;
+    });
+}
+
+
+// 🔥 LOAD DASHBOARD + LIST
+function loadDashboard() {
+
+    // 📊 Dashboard stats
+    fetch("http://127.0.0.1:8081/api/dashboard")
+    .then(res => res.json())
+    .then(data => {
+
+        document.getElementById("dashboard").innerHTML = `
+            <div class="card">
+                <h4>Total Orders</h4>
+                <p>${data.totalOrders}</p>
+            </div>
+
+            <div class="card">
+                <h4>Average Delay</h4>
+                <p>${data.averageDelay}</p>
+            </div>
+
+            <div class="card">
+                <h4>High Risk Orders</h4>
+                <p>${data.highRiskOrders}</p>
+            </div>
+        `;
+    });
+
+
+    // 📦 All shipments
+    fetch("http://127.0.0.1:8081/api/all")
+    .then(res => res.json())
+    .then(data => {
+
+        let html = "";
+
+        data.forEach(order => {
+
+            let categoryClass = order.delayCategory.toLowerCase();
+
+            html += `
+                <div class="card">
+                    <p><b>${order.orderId}</b></p>
+                    <p>Status: ${order.status}</p>
+                    <p>Location: ${order.currentLocation}</p>
+                    <p>Delay: ${order.delayProbability} 
+                       (<span class="${categoryClass}">${order.delayCategory}</span>)</p>
+                </div>
+            `;
+        });
+
+        document.getElementById("list").innerHTML = html;
+    });
+}
+
+
+// 🔥 AUTO LOAD ON PAGE START
+loadDashboard();
+
+</script>
+
+</body>
+</html>
