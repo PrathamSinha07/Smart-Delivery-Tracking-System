@@ -1,27 +1,27 @@
-# 📦 Smart Delivery Tracking System
+#  Smart Delivery Tracking System
 
 A full-stack logistics tracking system with delay prediction and real-time dashboard insights.
 
 ---
 
-## 🚀 Features
+##  Features
 
-- 📍 Track shipment using Order ID
-- 📊 Dashboard with analytics:
+-    Track shipment using Order ID
+-     Dashboard with analytics:
   - Total Orders
   - Average Delay
   - High Risk Shipments
-- 🤖 Delay Prediction System using:
+-    Delay Prediction System using:
   - Distance
   - Traffic Level
   - Warehouse Load
-- 💡 AI-style explanation for delay reasons
-- ⚠️ Error handling for invalid Order IDs
-- 📦 Multiple shipment tracking
+- AI-style explanation for delay reasons
+- Error handling for invalid Order IDs
+- Multiple shipment tracking
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - Backend: Spring Boot (Java)
 - Database: PostgreSQL
@@ -30,7 +30,7 @@ A full-stack logistics tracking system with delay prediction and real-time dashb
 
 ---
 
-## 📸 How to Use
+##  How to Use
 
 1. Run backend (Spring Boot)
 2. Open `index.html`
@@ -41,7 +41,7 @@ A full-stack logistics tracking system with delay prediction and real-time dashb
 
 ---
 
-## 🧠 System Design
+##  System Design
 
 The system calculates delay probability based on:
 
@@ -56,7 +56,7 @@ Then classifies delay into:
 
 ---
 
-## 📊 Dashboard
+##  Dashboard
 
 - Displays real-time shipment analytics
 - Helps identify high-risk deliveries
@@ -64,7 +64,7 @@ Then classifies delay into:
 
 ---
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - Live tracking with GPS APIs
 - Google Maps integration
@@ -73,6 +73,6 @@ Then classifies delay into:
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Pratham Sinha**
