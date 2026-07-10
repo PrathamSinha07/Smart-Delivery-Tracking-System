@@ -1,9 +1,5 @@
 # Smart Delivery Tracking System
 
-[![Live Deployment](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://deliverytracking.vercel.app/)
-[![Vercel Status](https://img.shields.io/badge/Vercel-Deployed-black?style=for-the-badge&logo=vercel)](https://deliverytracking.vercel.app/)
-[![Spring Boot](https://img.shields.io/badge/Spring--Boot-v4.0.3-6DB33F?style=for-the-badge&logo=springboot)](https://spring.io/projects/spring-boot)
-
 A modern, reactive logistics management dashboard built to optimize and simulate global supply chain flows. The system features real-time telemetry, advanced order management filtering, and predictive, machine-learning-driven delivery delay risk monitoring.
 
 🔗 **Live Deployment:** [https://deliverytracking.vercel.app/](https://deliverytracking.vercel.app/)
