@@ -228,11 +228,11 @@ export const mockShipments: Record<string, ShipmentDetails> = {
     destination: "Gurugram office",
     currentLocation: "Gurugram Hub",
     distance: 45,
-    warehouseLoad: 40,
-    trafficLevel: 60,
-    delayProbability: 0.35,
-    delayCategory: "Medium",
-    reason: "Moderate traffic and smooth warehouse operations, short distance shipment affecting delivery time",
+    warehouseLoad: 30,
+    trafficLevel: 35,
+    delayProbability: 0.24,
+    delayCategory: "Low",
+    reason: "Low traffic and smooth warehouse operations, short distance shipment affecting delivery time",
     expectedDelivery: "2026-07-08",
     priority: "High",
     packageInfo: {
@@ -257,7 +257,7 @@ export const mockShipments: Record<string, ShipmentDetails> = {
       name: "Gurugram Local Hub",
       manager: "Rohit Verma",
       phone: "+91 98877 66554",
-      loadCapacity: "40%"
+      loadCapacity: "30%"
     },
     timeline: [
       { status: "Order Placed", location: "Delhi Gateway", time: "2026-07-07 09:00 AM", completed: true },
@@ -270,10 +270,10 @@ export const mockShipments: Record<string, ShipmentDetails> = {
   },
   "ORD105": {
     orderId: "ORD105",
-    status: "Packed",
+    status: "Delivered",
     origin: "Pune Logistics Hub",
     destination: "Mumbai Office",
-    currentLocation: "Pune Logistics Hub",
+    currentLocation: "Mumbai Office",
     distance: 150,
     warehouseLoad: 80,
     trafficLevel: 20,
@@ -309,45 +309,44 @@ export const mockShipments: Record<string, ShipmentDetails> = {
     timeline: [
       { status: "Order Placed", location: "Pune Logistics Hub", time: "2026-07-07 04:00 PM", completed: true },
       { status: "Packed", location: "Pune Logistics Hub", time: "2026-07-08 08:30 AM", completed: true },
-      { status: "Dispatched", location: "Pending", time: "Pending", completed: false },
-      { status: "In Transit", location: "Pending", time: "Pending", completed: false },
-      { status: "Out for Delivery", location: "Pending", time: "Pending", completed: false },
-      { status: "Delivered", location: "Pending", time: "Pending", completed: false }
+      { status: "Dispatched", location: "Pune Logistics Hub", time: "2026-07-08 10:00 AM", completed: true },
+      { status: "In Transit", location: "Mumbai Hub", time: "2026-07-08 01:00 PM", completed: true },
+      { status: "Out for Delivery", location: "Mumbai Office", time: "2026-07-08 03:00 PM", completed: true },
+      { status: "Delivered", location: "Mumbai Office", time: "2026-07-08 04:30 PM", completed: true }
     ]
   }
 };
 
 export const mockDashboardStats: DashboardStats = {
-  totalOrders: 1450,
-  activeDeliveries: 345,
-  delivered: 1045,
-  delayed: 60,
-  avgDeliveryTime: "24.8 hrs",
-  successRate: 95.8,
-  highRiskOrders: 18
+  totalOrders: 5,
+  activeDeliveries: 2,
+  delivered: 2,
+  delayed: 1,
+  avgDeliveryTime: "28.4 hrs",
+  successRate: 80.0,
+  highRiskOrders: 1
 };
 
 export const mockDashboardCharts: DashboardCharts = {
   deliveriesPerDay: [
-    { date: "Jul 01", count: 120, delayed: 4 },
-    { date: "Jul 02", count: 135, delayed: 3 },
-    { date: "Jul 03", count: 142, delayed: 8 },
-    { date: "Jul 04", count: 110, delayed: 2 },
-    { date: "Jul 05", count: 155, delayed: 10 },
-    { date: "Jul 06", count: 160, delayed: 5 },
-    { date: "Jul 07", count: 175, delayed: 3 }
+    { date: "Jul 01", count: 0, delayed: 0 },
+    { date: "Jul 02", count: 1, delayed: 0 },
+    { date: "Jul 03", count: 0, delayed: 1 },
+    { date: "Jul 04", count: 1, delayed: 0 },
+    { date: "Jul 05", count: 0, delayed: 0 },
+    { date: "Jul 06", count: 0, delayed: 0 },
+    { date: "Jul 07", count: 0, delayed: 0 }
   ],
   ordersByCity: [
-    { city: "Mumbai", count: 420 },
-    { city: "Delhi", count: 360 },
-    { city: "Bangalore", count: 310 },
-    { city: "Pune", count: 180 },
-    { city: "Chennai", count: 140 },
-    { city: "Kolkata", count: 120 }
+    { city: "Delhi", count: 1 },
+    { city: "Mumbai", count: 1 },
+    { city: "Pune", count: 1 },
+    { city: "Kolkata", count: 1 },
+    { city: "Gurugram", count: 1 }
   ],
   delayDistribution: [
-    { name: "Low Risk (<30%)", value: 1120, color: "#10B981" },
-    { name: "Medium Risk (30-70%)", value: 270, color: "#F59E0B" },
-    { name: "High Risk (>70%)", value: 60, color: "#EF4444" }
+    { name: "Low Risk (<30%)", value: 3, color: "#10B981" },
+    { name: "Medium Risk (30-70%)", value: 1, color: "#F59E0B" },
+    { name: "High Risk (>70%)", value: 1, color: "#EF4444" }
   ]
 };
